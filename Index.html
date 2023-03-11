@@ -1,69 +1,132 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Image Finder</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Image Finder</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-</head>
-
-<body>
-  <div class="container">
-    <div class="header-section">
-      <div class="heading">
-        Image Finder App
+  <body>
+    <div class="container">
+      <div class="header-section">
+        <div class="heading">Image Finder App</div>
+        <div class="input-row">
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              onkeyup="inputSearchKeyWord(event)"
+              class="form-control"
+              placeholder="Search here..."
+              aria-label="Recipient's username"
+              aria-describedby="button-addon2"
+            />
+            <button
+              class="btn btn-dark"
+              type="button"
+              id="button-addon2"
+              onclick="searchImages()"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-search"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="input-row">
-        <div class="input-group mb-3">
-          <input type="text" onkeyup="inputSearchKeyWord(event)" class="form-control" placeholder="Search here..."
-            aria-label="Recipient's username" aria-describedby="button-addon2">
-          <button class="btn btn-dark" type="button" id="button-addon2" onclick="searchImages()"><svg
-              xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
-              viewBox="0 0 16 16">
-              <path
-                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-            </svg></button>
+
+      <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div
+          id="liveToast"
+          class="toast bg-info-subtle"
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+        >
+          <div class="toast-header">
+            <img src="..." class="rounded me-2" alt="..." />
+            <strong class="me-auto">Notification</strong>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="toast"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="toast-body">No Results Found for your Search Keyword</div>
+        </div>
+      </div>
+      <div
+        class="spinner-grow text-info"
+        id="loader"
+        role="status"
+        style="visibility: hidden"
+      >
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <!-- gallery-section  -->
+      <div class="gallery-section">
+        <div class="card" style="width: 18rem">
+          <img src="`${imgUrl}`" class="card-img-top" alt="..." id="photo-id" />
+        </div>
+        <!-- second-card -->
+        <div class="card next-cards" style="width: 18rem; visibility: hidden">
+          <img src="imgUrl" class="card-img-top" alt="..." id="photo-id" />
+        </div>
+        <!-- Third Card -->
+        <div class="card next-cards" style="width: 18rem; visibility: hidden">
+          <img src="imgUrl" class="card-img-top" alt="..." id="photo-id" />
+        </div>
+        <!-- 4 Card -->
+        <div class="card next-cards" style="width: 18rem; visibility: hidden">
+          <img src="imgUrl" class="card-img-top" alt="..." id="photo-id" />
+        </div>
+        <!-- 5 Card -->
+        <div class="card next-cards" style="width: 18rem; visibility: hidden">
+          <img src="imgUrl" class="card-img-top" alt="..." id="photo-id" />
+        </div>
+        <!--6 Card -->
+        <div class="card next-cards" style="width: 18rem; visibility: hidden">
+          <img src="imgUrl" class="card-img-top" alt="..." id="photo-id" />
+        </div>
+        <!-- 7 Card -->
+        <div class="card next-cards" style="width: 18rem; visibility: hidden">
+          <img src="imgUrl" class="card-img-top" alt="..." id="photo-id" />
+        </div>
+        <!--8 Card -->
+        <div class="card next-cards" style="width: 18rem; visibility: hidden">
+          <img src="imgUrl" class="card-img-top" alt="..." id="photo-id" />
+        </div>
+        <!--9 Card -->
+        <div class="card next-cards" style="width: 18rem; visibility: hidden">
+          <img src="imgUrl" class="card-img-top" alt="..." id="photo-id" />
+        </div>
+        <!-- 10 Card -->
+        <div class="card next-cards" style="width: 18rem; visibility: hidden">
+          <img src="imgUrl" class="card-img-top" alt="..." id="photo-id" />
         </div>
       </div>
     </div>
-
-    <div class="toast-container position-fixed top-0 end-0 p-3 ">
-      <div id="liveToast" class="toast bg-info-subtle" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-          <img src="..." class="rounded me-2" alt="...">
-          <strong class="me-auto">Notification</strong>
-          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-         No Results Found for your Search Keyword
-        </div>
-      </div>
-    </div>
-    <div class="spinner-grow text-info" id="loader" role="status" style="visibility: hidden;">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-    <!-- gallery-section  -->
-    <div class="gallery-section">
-      <div class="card" style="width: 18rem;">
-        <img src=`${imgUrl}` class="card-img-top" alt="..." id="photo-id">
-      </div>
-      <!-- second-card -->
-      <div class="card next-cards" style="width: 18rem; visibility: hidden;">
-        <img src=`${imgUrl}` class="card-img-top" alt="..." id="photo-id">
-      </div>
-      <!-- Third Card -->
-      <div class="card next-cards" style="width: 18rem;visibility: hidden;" >
-        <img src=`${imgUrl}` class="card-img-top" alt="..." id="photo-id">
-      </div>
-    </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-    crossorigin="anonymous"></script>
-</body>
-
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
